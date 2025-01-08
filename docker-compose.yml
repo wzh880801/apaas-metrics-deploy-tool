@@ -5,8 +5,8 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.18.0.0/16
-          gateway: 172.18.10.1
+        - subnet: 172.28.0.0/16
+          gateway: 172.28.10.1
 
 services:
 
@@ -20,7 +20,7 @@ services:
       - 127.0.0.1:6379:6379
     networks:
       apaas-ob-network:
-        ipv4_address: 172.18.10.6
+        ipv4_address: 172.28.10.6
     volumes:
       - ./redis/data:/data
       - ./redis/conf/redis.conf:/etc/redis/redis.conf
@@ -38,7 +38,7 @@ services:
     container_name: grafana-loki
     networks:
       apaas-ob-network:
-        ipv4_address: 172.18.10.7
+        ipv4_address: 172.28.10.7
     ports:
       - 127.0.0.1:3100:3100
     restart: always
@@ -60,7 +60,7 @@ services:
     #             memory: ${MEMORY_LIMIT}
     networks:
       apaas-ob-network:
-        ipv4_address: 172.18.10.8
+        ipv4_address: 172.28.10.8
     ports:
       - 127.0.0.1:9090:9090
     restart: always
@@ -90,7 +90,7 @@ services:
     #       memory: ${MEMORY_LIMIT}
     networks:
       apaas-ob-network:
-        ipv4_address: 172.18.10.9
+        ipv4_address: 172.28.10.9
     ports:
       - 3000:3000
     restart: always
@@ -127,7 +127,7 @@ services:
   #   container_name: agent-service-go
   #   networks:
   #     apaas-ob-network:
-  #       ipv4_address: 172.18.10.10
+  #       ipv4_address: 172.28.10.10
   #   ports:
   #     - 127.0.0.1:33444:33444
   #   restart: always
@@ -138,7 +138,7 @@ services:
   #     AGENT_LOG_LEVEL: info
   #     AGENT_LOG_FILE_ENABLE: "true"
   #     AGENT_LOG_LOKI_ENABLE: "true"
-  #     AGENT_LOG_LOKI_ROOT_URL: http://172.18.10.7:3100
+  #     AGENT_LOG_LOKI_ROOT_URL: http://172.28.10.7:3100
   #   volumes:
   #     - ./agent/conf:/mnt/apaas_ob_agent/conf
   #     - ./agent/logs:/var/log/apaas_ob_agent
@@ -153,14 +153,14 @@ services:
     container_name: agent-service-node
     networks:
       apaas-ob-network:
-        ipv4_address: 172.18.10.10
+        ipv4_address: 172.28.10.10
     environment:
       - METRICS_HTTP_PORT=33444
       - BULL_BOARD_PORT=44445
-      - REDIS_CONN_URL=redis://172.18.10.6:6379/14
+      - REDIS_CONN_URL=redis://172.28.10.6:6379/14
       - APP_ID=cli_a59a471e0a7fd00d
       - APP_SECRET=LOplEasQrxvmWDiqa************
-      - LOKI_API_URL=http://172.18.10.7:3100/loki/api/v1/push
+      - LOKI_API_URL=http://172.28.10.7:3100/loki/api/v1/push
       - LOKI_API_KEY=123456
     volumes:
       - ./agent/logs:/var/logs/agent-service-node
@@ -182,13 +182,13 @@ services:
           memory: 1024M
     networks:
       apaas-ob-network:
-        ipv4_address: 172.18.10.11
+        ipv4_address: 172.28.10.11
     ports:
       - 127.0.0.1:44444:44444
       - 44445:44445
     restart: always
     environment:
-      LOKI_API_URL: http://172.18.10.7:3100/loki/api/v1/push
+      LOKI_API_URL: http://172.28.10.7:3100/loki/api/v1/push
       LOKI_API_KEY: 123456
 
       # 可选，Grafana 请求时要不要进行请求验证
@@ -197,17 +197,17 @@ services:
 
       # 设置 redis
       # 方式一，如果设置了 REDIS_CONN_URL，那么 REDIS_HOST、REDIS_PORT、REDIS_DB_NUMBER 将被忽略
-      REDIS_CONN_URL: redis://172.18.10.6:6379/15
+      REDIS_CONN_URL: redis://172.28.10.6:6379/15
 
       # 方式二
-      # REDIS_HOST: 172.18.10.6
+      # REDIS_HOST: 172.28.10.6
       # REDIS_PORT: 6379
       # REDIS_DB_NUMBER: 15
 
       ### 注意 ###
       # 启动服务前，请将如下地址替换为你自己的 webhook 机器人地址
       # 你可以按照 WEBHOOK_{id}: {webhook robot url} 的格式添加更多 endpoint
-      # 添加后，对应的 webhook 地址为 http://172.18.10.11:44444/webhook/{id}
+      # 添加后，对应的 webhook 地址为 http://172.28.10.11:44444/webhook/{id}
       # 在 Grafana 中添加 Contact points 时，可作为 webhook 地址填入
       # 其中 Authorization Header - Credentials 中填入上述 WEBHOOK_AUTH_KEY 对应的值
       WEBHOOK_default: https://open.feishu.cn/open-apis/bot/v2/hook/2235deb4-0972-46db-852f-69fa6aa213bc
@@ -225,12 +225,12 @@ services:
   #   container_name: mock_metrics
   #   networks:
   #     apaas-ob-network:
-  #       ipv4_address: 172.18.10.10
+  #       ipv4_address: 172.28.10.10
   #   ports:
   #     - 33444:33444
   #   restart: always
   #   environment:
-  #     REDIS_CONN_URL: redis://172.18.10.6:6379
+  #     REDIS_CONN_URL: redis://172.28.10.6:6379
   #   user: "0"
   #   entrypoint: node
   #   command:

@@ -24,14 +24,14 @@ scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'loki'
     static_configs:
-      - targets: [ '172.18.10.7:3100' ]
+      - targets: [ '172.28.10.7:3100' ]
   - job_name: 'prometheus'
     static_configs:
       - targets: [ 'localhost:9090' ]
   - job_name: 'grafana'
     static_configs:
-      - targets: [ '172.18.10.9:3000' ]
+      - targets: [ '172.28.10.9:3000' ]
   - job_name: 'apaas'
     static_configs:
-      - targets: [ '172.18.10.10:33444' ]
+      - targets: [ '172.28.10.10:33444' ]
 

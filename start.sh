@@ -12,20 +12,28 @@ if ! command -v docker-compose &> /dev/null; then
     exit 1
 fi
 
-if ! [ -d "./prometheus/data" ]; then
-    mkdir ./prometheus/data && chmod -R 777 ./prometheus/data
-else
-    chmod -R 777 ./prometheus/data
-fi
+paths=(
+    "./agent/logs"
+    "./grafana/data"
+    "./grafana/log"
+    "./loki/chunks"
+    "./loki/rules"
+    "./prometheus/data"
+    "./prometheus/logs"
+    "./redis/data"
+    "./redis/logs"
+)
 
-if ! [ -d "./prometheus/logs" ]; then
-    mkdir ./prometheus/logs && chmod -R 777 ./prometheus/logs
-else
-    chmod -R 777 ./prometheus/logs
-fi
+for path in "${paths[@]}"; do
+    if ! [ -d "$path" ]; then
+        mkdir $path && chmod -R 777 $path
+    else
+        chmod -R 777 $path
+    fi
+done
 
 # 判断是否是首次启动
-# 区别在于首次启动会将 grafana 的默认配置挂载到 grafana，这样有默认的看板
+# # 区别在于首次启动会将 grafana 的默认配置挂载到 grafana，这样有默认的看板
 if [ -f "./grafana/data/grafana.db" ]; then
     # echo "非首次启动"
     docker-compose -f ./docker-compose.yml up -d
