@@ -1,4 +1,4 @@
-# deploy-tool
+# Setup
 
 1. 安装 docker-compose
 
@@ -32,10 +32,19 @@ WEBHOOK_openapi_alert: https://open.feishu.cn/open-apis/bot/v2/hook/2235deb4-097
 
 4. 设置目录权限为可读写
 ```
-sudo chmod 777 ./deploy-tool
+sudo chmod 777 ./apaas-metrics-deploy-tool
 ```
 
 5. 进入到工程根目录，docker-compose 拉起服务
 ```bash
 sudo ./start.sh
 ```
+
+# agent-service 和 webhook addin
+- [agent-service-node](https://github.com/wzh880801/agent-service-node)
+  
+  订阅应用指标上报事件，使用 Prometheus SDK 进行指标处理，暴露 metrics http endpoint 以便让 Prometheus server 抓取指标数据
+
+- [webhook addin](https://github.com/wzh880801/webhook_addin)
+
+  提供一个 http webhook，接收 grafana 推送的 webhook alert，将信息以飞书卡片消息的形式推送到对应的飞书自定义机器人
