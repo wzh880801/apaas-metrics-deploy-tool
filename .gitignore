@@ -1,0 +1,13 @@
+
+loki/chunks/
+prometheus/data/
+prometheus/logs/
+redis/data/
+/grafana/*
+!/grafana/conf
+redis/logs/
+code-server/config/*
+code-server/*.*
+agent/logs/
+
+.DS_Store

@@ -1,0 +1,21 @@
+http_server:
+  host: 0.0.0.0
+  port: 8888
+
+feishu_app:
+  app_id: cli_a68f84e19b6e100b
+  app_secret: ch0a2qA9NTSnz2p5Az***********
+
+inner_logs:
+  log_level: info
+  console:
+    enable: true
+  file:
+    enable: true
+    filename: /var/log/apaas_ob_agent/run.log
+    seg_dua: day
+    max_age: 30
+  loki:
+    enable: true
+    root_url: "http://127.0.0.1:3100"
+    labels: { service_name: apaas_agent }
