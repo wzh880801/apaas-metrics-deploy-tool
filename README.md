@@ -32,7 +32,7 @@ WEBHOOK_openapi_alert: https://open.feishu.cn/open-apis/bot/v2/hook/2235deb4-097
 
 4. 设置目录权限为可读写
 ```
-sudo chmod 777 ./apaas-metrics-deploy-tool
+sudo chmod -R 777 ./apaas-metrics-deploy-tool
 ```
 
 5. 进入到工程根目录，docker-compose 拉起服务
