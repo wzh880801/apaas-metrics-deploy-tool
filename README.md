@@ -66,6 +66,9 @@ git clone https://github.com/wzh880801/apaas-metrics-deploy-tool.git
 ./start.sh
 ```
 
+![bash](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/bash.png)
+![docker-run](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/docker-run.png)
+
 # 使用到的 agent-service 和 webhook addin
 - [agent-service-node](https://github.com/wzh880801/agent-service-node)
   
