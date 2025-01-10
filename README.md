@@ -1,5 +1,5 @@
 # 这是什么
-本项目为[飞书低代码平台](https://ae.feishu.cn/)的开源项目，提供 docker-compose 部署编排，一键部署 [Prometheus](https://github.com/prometheus/prometheus)、[Grafana](https://github.com/grafana/grafana) 等服务，用于监听低代码平台应用指标上报事件并将对应指标数据写入到 Prometheus server。同事，基于 Grafana 提供了预置的可视化看板和报警规则，使应用管理员和开发者 0 代码实现对应用指标的可视化运维与监控。
+本项目为[飞书低代码平台](https://ae.feishu.cn/)的开源项目，提供 docker-compose 部署编排，一键部署 [Prometheus](https://github.com/prometheus/prometheus)、[Grafana](https://github.com/grafana/grafana) 等服务，用于监听低代码平台应用指标上报事件并将对应指标数据写入到 Prometheus server。同时，基于 Grafana 提供了预置的可视化看板和报警规则，使应用管理员和开发者 0 代码实现对应用指标的可视化运维与监控。
 
 ![应用指标看板](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/feishu_lowcode_app_metrics.png)
 ![指标下钻](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/metrics_breakdown.png)
