@@ -33,12 +33,13 @@ for path in "${paths[@]}"; do
 done
 
 # 判断是否是首次启动
-# # 区别在于首次启动会将 grafana 的默认配置挂载到 grafana，这样有默认的看板
+# # 区别在于首次启动会将 grafana 的默认配置挂载到 grafana，这样有默认的看板及预置好的账号等
 if [ -f "./grafana/data/grafana.db" ]; then
     # echo "非首次启动"
     docker-compose -f ./docker-compose.yml up -d
 else
     # echo "首次启动"
     echo 'first start'
-    docker-compose -f ./docker-compose-first-time.yml up -d
+    cp ./grafana/conf/grafana.db ./grafana/data/grafana.db
+    docker-compose -f ./docker-compose.yml up -d
 fi
