@@ -7,7 +7,7 @@
 ![应用指标看板](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/feishu_lowcode_app_metrics.png)
 
 - 使用 Grafana 的 metrics explore 对指标进行 breakdown 查看分析
-![指标下钻](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/metrics_breakdown.png)
+![指标下钻](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/metrics_breakdown_1.png)
 
 - 使用 Grafana 的 alert rules 创建报警规则
 ![报警规则](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/alert_rules.png)
