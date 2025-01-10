@@ -13,7 +13,7 @@
 ![报警规则](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/alert_rules.png)
 
 - 飞书中收到的告警推送
-![oapi报警](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/oapi_alert.png)
+![oapi报警](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/oapi_alert_1.png)
 ![函数报警](https://galaxy-imgs.oss-cn-beijing.aliyuncs.com/metrcis_imgs/function_error_alert.png)
 
 # 如何部署
