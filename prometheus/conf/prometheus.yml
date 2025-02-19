@@ -34,4 +34,24 @@ scrape_configs:
   - job_name: 'apaas'
     static_configs:
       - targets: [ '172.28.10.10:33444' ]
+  
+  # 实现同域名多路径的 metrcis 爬取
+  # 方式一
+  # 使用多个 job_name
+  # - job_name: "tenant_id_namespace"
+  #   metrics_path: /:tenant_id_namespace/metrics
+  #   static_configs:
+  #     - targets: ["172.28.10.10:33444"]
+  
+  # 方式二
+  # 使用 relabel_configs
+  # - job_name: 'apaas'
+  #   metrics_path: '/metrics'  # 默认路径，会被替换
+  #   static_configs:
+  #     - targets: ['172.28.10.10:33444']
+  #       labels:
+  #         __metrics_path__: '/390_package_7a2002__c/metrics'
+  #     - targets: ['172.28.10.10:33444']
+  #       labels:
+  #         __metrics_path__: '/100_ICIM/metrics'
 

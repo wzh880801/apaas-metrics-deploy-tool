@@ -162,6 +162,12 @@ services:
       - APP_SECRET=LOplEasQrxvmWDiqa************
       - LOKI_API_URL=http://172.28.10.7:3100/loki/api/v1/push
       - LOKI_API_KEY=123456
+      # 运行模式，默认 SINGLE_APP_MODE
+      # DUAL_APP_MODE 
+      #    - 1:N 模式，比如 ISV 模式，用 1 个 app_id 订阅了多个 aPaaS 应用的观测事件，避免单个 metric endpoint 内容过多导致 prom server 爬取失败
+      #    - metrics endpoint 地址为 /:tenant_id_namespace/metrics
+      # SINGLE_APP_MODE - 所有的 metrics string 都通过 /metrics endpoint 暴露
+      # - RUN_MODE=DUAL_APP_MODE
     volumes:
       - ./agent/logs:/var/logs/agent-service-node
     ports:
