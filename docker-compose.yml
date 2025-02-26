@@ -115,7 +115,7 @@ services:
       - loki
       - prometheus
       - grafana_webhook_addin
-      - metrics_agent
+      # - metrics_agent
   
   # 启动 metrics agent 用来接收开放平台事件
   # 暴露 /metrics endpoint 供 prometheus server 来 scrape
