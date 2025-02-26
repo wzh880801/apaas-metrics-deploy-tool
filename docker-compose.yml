@@ -168,10 +168,15 @@ services:
       #    - metrics endpoint 地址为 /:tenant_id_namespace/metrics
       # SINGLE_APP_MODE - 所有的 metrics string 都通过 /metrics endpoint 暴露
       # - RUN_MODE=DUAL_APP_MODE
+      - PROM_CFG_FILE=/etc/prometheus/conf/prometheus.yml
+      - SCRAPE_HOST_PORT=172.28.10.10:33444
+      - PROM_URL=http://172.28.10.8:9090
+
     volumes:
       - ./agent/logs:/var/logs/agent-service-node
+      - ./prometheus/conf/prometheus.yml:/etc/prometheus/conf/prometheus.yml
     ports:
-      - 127.0.0.1:33444:33444
+      - 33444:33444
       - 127.0.0.1:44446:44445
     restart: unless-stopped
     depends_on:
