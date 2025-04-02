@@ -111,41 +111,14 @@ services:
       - ./grafana/data:/var/lib/grafana
       - ./grafana/log:/var/log/grafana
     entrypoint: /usr/share/grafana/bin/grafana-server
-    depends_on:
-      - loki
-      - prometheus
-      - grafana_webhook_addin
+    # depends_on:
+      # - loki
+      # - prometheus
+      # - grafana_webhook_addin
       # - metrics_agent
   
   # 启动 metrics agent 用来接收开放平台事件
   # 暴露 /metrics endpoint 供 prometheus server 来 scrape
-  # 提供了 2 个版本，go 和 node，根据需要自行选择对应的版本
-
-  # go version
-  # metrics_agent:
-  #   image: galaxy911/apaas_ob_agent:latest
-  #   container_name: agent-service-go
-  #   networks:
-  #     apaas-ob-network:
-  #       ipv4_address: 172.28.10.10
-  #   ports:
-  #     - 127.0.0.1:33444:33444
-  #   restart: always
-  #   environment:
-  #     FEISHU_APP_ID: cli_a68f84e19b6e100b
-  #     FEISHU_APP_SECRET: 1****************
-  #     AGENT_SERVER_PORT: 8001
-  #     AGENT_LOG_LEVEL: info
-  #     AGENT_LOG_FILE_ENABLE: "true"
-  #     AGENT_LOG_LOKI_ENABLE: "true"
-  #     AGENT_LOG_LOKI_ROOT_URL: http://172.28.10.7:3100
-  #   volumes:
-  #     - ./agent/conf:/mnt/apaas_ob_agent/conf
-  #     - ./agent/logs:/var/log/apaas_ob_agent
-  #   command:
-  #     - -config-file=/mnt/apaas_ob_agent/conf/config.yaml
-  #     - -prom-schema-dir=/mnt/apaas_ob_agent/conf/schema/prometheus
-  #   entrypoint: /opt/apaas_ob_agent/bin/agent
 
   # node version
   metrics_agent:
@@ -162,6 +135,12 @@ services:
       - APP_SECRET=LOplEasQrxvmWDiqa************
       - LOKI_API_URL=http://172.28.10.7:3100/loki/api/v1/push
       - LOKI_API_KEY=123456
+
+      # # 是否处理非 online 环境（如开发环境）的指标数据
+      - PROCESS_DEV_EVENTS=1
+
+      # # 是否保存原始事件信息
+      - SAVE_RAW_EVENT=1
 
       # 运行模式，默认 SINGLE_APP_MODE
       - RUN_MODE=DUAL_APP_MODE
@@ -234,27 +213,6 @@ services:
     entrypoint: /repos/webhook/start.sh
     depends_on:
       - redis
-
-  # 这是可选项
-  # 用于启动一个 metrcis mock 服务，生成对应的 metrics
-  # 注意，此服务不要和 metrics_agent 同时启动（ip 地址配置是冲突的）
-  # mock_metrics:
-  #   image: galaxy911/mm-multi-platform:latest
-  #   container_name: mock_metrics
-  #   networks:
-  #     apaas-ob-network:
-  #       ipv4_address: 172.28.10.10
-  #   ports:
-  #     - 33444:33444
-  #   restart: always
-  #   environment:
-  #     REDIS_CONN_URL: redis://172.28.10.6:6379
-  #   user: "0"
-  #   entrypoint: node
-  #   command:
-  #     - /repos/mock_metrics/http/index-prom.js
-  #   depends_on:
-  #     - redis
 
   # 这是可选项
   # 用于启动一个 code-server 容器（VSCode Online)，方便开发者直接基于 Web 来改对应的工程代码
